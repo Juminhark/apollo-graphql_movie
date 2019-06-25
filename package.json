@@ -1,0 +1,7 @@
+{
+  "name": "graphQL-Server",
+  "version": "1.0.0",
+  "description": "Make GraphQL Server - Movie API with GraphQL",
+  "main": "index.js",
+  "license": "MIT"
+}
