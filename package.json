@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "Make GraphQL Server - Movie API with GraphQL",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.0"
+  }
 }
