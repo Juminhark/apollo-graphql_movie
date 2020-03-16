@@ -1,0 +1,21 @@
+{
+  "name": "apollo-graphql-tutorial",
+  "version": "1.0.0",
+  "description": "graphql apollo react",
+  "main": "server.js",
+  "repository": "https://github/Juminhark/apollo-graphql-tutorial.git",
+  "author": "Juminhark <40381241+Juminhark@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "graphql-yoga": "^1.18.3"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1"
+  }
+}
