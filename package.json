@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "graphql apollo react",
   "main": "server.js",
-  "repository": "https://github/Juminhark/apollo-graphql-tutorial.git",
+  "repository": "https://github/Juminhark/apollo-graphql_movie.git",
   "author": "Juminhark <40381241+Juminhark@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
