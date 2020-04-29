@@ -1,68 +1,177 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# After create-react-app
 
-## Available Scripts
+### src config
 
-In the project directory, you can run:
+- [jsconfig.json](https://code.visualstudio.com/docs/languages/jsconfig)
 
-### `yarn start`
+```ts
+// jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# css - [Material-UI](https://material-ui.com/getting-started/installation/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Step 1 : Install
 
-### `yarn test`
+```sh
+yarn add @material-ui/core
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Step 2 : Connect css to create-react-app
 
-### `yarn build`
+```ts
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from 'App';
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// css - material-ui
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from 'config/Materialui';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <App />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Layout
 
-### `yarn eject`
+### Step 1 : Create Layout
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```ts
+// components/Layout.js
+import React from 'react';
+// material-ui
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+// componenet
+import Copyright from 'components/Copyright';
+import ProTip from 'components/ProTip';
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const Layout = ({ children }) => {
+  return (
+    <Container maxWidth='sm'>
+      <Typography variant='h4' component='h1' gutterBottom>
+        Material Ui
+      </Typography>
+      s<main>{children}</main>
+      <ProTip />
+      <Copyright />
+    </Container>
+  );
+};
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+export default Layout;
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Step 2 : Connect Layout to App
 
-## Learn More
+```ts
+// App.js
+import React from 'react';
+import Layout from 'components/Layout';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+function App() {
+  return (
+    <Layout>
+      <h1>hello world</h1>
+    </Layout>
+  );
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+export default App;
+```
 
-### Code Splitting
+# [Apollo-CLient v3.0 beta](https://www.apollographql.com/docs/react/v3.0-beta/get-started/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Step 1 : Installation
 
-### Analyzing the Bundle Size
+```sh
+yarn add @apollo/client
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Step 2 :Create a client
 
-### Making a Progressive Web App
+```ts
+// config/Apollo.js
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:4000',
+  }),
+});
 
-### Advanced Configuration
+export default client;
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Step 3 :Connect your client to create-react-app
 
-### Deployment
+```ts
+// index.js
+...
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+import { ApolloProvider } from '@apollo/client';
+import client from 'config/Apollo';
 
-### `yarn build` fails to minify
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    ...
+  </ApolloProvider>,
+  document.getElementById('root')
+);
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- issue
+
+```sh
+./node_modules/graphql-tag/src/index.js
+Module not found: Can't resolve 'graphql/language/parser'
+```
+
+- solve
+
+```sh
+npm i --save grpahql
+```
+
+# Route-based code splitting
+
+```sh
+yarn add react-router-dom
+```
+
+```ts
+// config/Router.js
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+const Detail = lazy(() => import('routes/Detail'));
+const Home = lazy(() => import('routes/Home'));
+
+const Router = () => {
+  return (
+    <Router>
+      <Suspense fallback={<div>Loading...?</div>}>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/:id' component={Detail} />
+        </Switch>
+      </Suspense>
+    </Router>
+  );
+};
+
+export default Router;
+```

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useParams, Link } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 
 const GET_MOVIE = gql`
   query Movie($id: Int!) {
@@ -13,7 +12,6 @@ const GET_MOVIE = gql`
       language
       medium_cover_image
       genres
-      isLiked @client
     }
   }
 `;
@@ -70,6 +68,10 @@ export default () => {
           </div>
         </div>
       </div>
+      <hr />
+      <Link to='/' className='btn btn-secondary'>
+        Back
+      </Link>
     </div>
   );
 };
