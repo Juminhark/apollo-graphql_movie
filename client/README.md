@@ -100,7 +100,7 @@ export default App;
 yarn add @apollo/client
 ```
 
-### Step 2 :Create a client
+### Step 2 : Create a client
 
 ```ts
 // config/Apollo.js
@@ -116,7 +116,7 @@ const client = new ApolloClient({
 export default client;
 ```
 
-### Step 3 :Connect your client to create-react-app
+### Step 3 : Connect your client to create-react-app
 
 ```ts
 // index.js
@@ -144,6 +144,12 @@ Module not found: Can't resolve 'graphql/language/parser'
 
 ```sh
 npm i --save grpahql
+```
+
+### Step 4 : Request Data
+
+```ts
+import { useQuery, gql } from '@apollo/client';
 ```
 
 # Route-based code splitting

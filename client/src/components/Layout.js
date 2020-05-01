@@ -1,17 +1,15 @@
 import React from 'react';
 // material-ui
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
 // componenet
 import Copyright from 'components/Copyright';
 import ProTip from 'components/ProTip';
+import NavBar from 'components/NavBar';
 
 const Layout = ({ children }) => {
   return (
-    <Container maxWidth='sm'>
-      <Typography variant='h4' component='h1' gutterBottom>
-        Material Ui
-      </Typography>
+    <Container maxWidth='lg'>
+      <NavBar />
 
       <main>{children}</main>
 
