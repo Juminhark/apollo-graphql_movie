@@ -7,7 +7,7 @@
   "author": "Juminhark <40381241+Juminhark@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "graphql-yoga": "^1.18.3"
   },
   "scripts": {
